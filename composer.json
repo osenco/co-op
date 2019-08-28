@@ -1,0 +1,22 @@
+{
+    "name": "osenco/co-op",
+    "description": "Intuitive PHP SDK for Co-operative Bank of Kenya. Just Plug 'N Play",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Osen Concepts",
+            "email": "hi@osen.co.ke"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Osen\\Coop": "src"
+        },
+        "files": ["src/helpers.php"]
+    }
+}
