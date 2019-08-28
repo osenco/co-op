@@ -7,7 +7,18 @@ class Service
 
     public static function init($configs = array())
     {
-        self::$config = (object) $configs;
+        $defaults = array(
+            "CK"                  => "",
+            "SK"                  => "",
+            "AccountNumber"       => "54321987654321",
+            "BankCode"            => "011",
+            "BranchCode"          => "00011001",
+            "CallbackURL"         => "/coop/callback",
+            "TransactionCurrency" => "KES",
+        );
+        
+        $parsed       = array_merge($defaults, $configs);
+        self::$config = (object) $parsed;
     }
 
     public static function token()
