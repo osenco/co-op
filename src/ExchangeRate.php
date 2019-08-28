@@ -1,11 +1,12 @@
 <?php
 namespace Osen\Coop;
+use Osen\Coop\Service;
 
 class ExchangeRate extends Service
 {
     public static function send($MessageReference, $FromCurrencyCode = 'KES', $ToCurrencyCode = 'USD', $callback = null)
     {
-        $url   = (parent::$env == 'live') ? 'https://developer.co-opbank.co.ke:8243/Enquiry/ExchangeRate/1.0.0' : 'http://developer.co-opbank.co.ke:8280/Enquiry/ExchangeRate/1.0.0';
+        $url   = parent::$host . '/Enquiry/ExchangeRate/1.0.0';
         $token = parent::token();
 
         $requestPayload = array(
@@ -25,13 +26,11 @@ class ExchangeRate extends Service
         curl_setopt($process, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($process, CURLOPT_RETURNTRANSFER, true);
 
-        $return = curl_exec($process);
-
+        $return   = curl_exec($process);
         $response = json_decode($return, true);
 
         return is_null($callback)
         ? $response
         : \call_user_func_array(array($callback), array($response));
-
     }
 }
