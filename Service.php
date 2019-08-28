@@ -16,7 +16,7 @@ class Service
             "CallbackURL"         => "/coop/callback",
             "TransactionCurrency" => "KES",
         );
-        
+
         $parsed       = array_merge($defaults, $configs);
         self::$config = (object) $parsed;
     }
@@ -43,5 +43,16 @@ class Service
         }
 
         return json_decode($response)->access_token;
+    }
+
+    public static function reconcile($callback = null)
+    {
+        $input    = file_get_contents('php://input');
+        $response = json_decode($input, true);
+        $response = !is_array($response) ? array() : $response;
+
+        return is_null($callback)
+        ? $response
+        : \call_user_func_array(array($callback), array($response));
     }
 }
