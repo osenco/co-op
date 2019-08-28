@@ -1,11 +1,12 @@
 <?php
 namespace Osen\Coop;
+use Osen\Coop\Service;
 
 class AccountTransactions extends Service
 {
-    public static function send($MessageReference, $AccountNumber, $NoOfTransactions = '1')
+    public static function send($MessageReference, $AccountNumber, $NoOfTransactions = '1', $callback = null)
     {
-        $url   = (parent::$env == 'live') ? 'https://developer.co-opbank.co.ke:8243/Enquiry/AccountTransactions/1.0.0/Account' : 'https://developer.co-opbank.co.ke:8243/Enquiry/AccountTransactions/1.0.0';
+        $url   = parent::$host . '/Enquiry/AccountTransactions/1.0.0/Account';
         $token = parent::token();
 
         $requestPayload = array(
@@ -24,8 +25,12 @@ class AccountTransactions extends Service
         curl_setopt($process, CURLOPT_TIMEOUT, 30);
         curl_setopt($process, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($process, CURLOPT_RETURNTRANSFER, true);
-        $return = curl_exec($process);
-		
-        return json_decode($return, true);
+
+        $return   = curl_exec($process);
+        $response = json_decode($return, true);
+
+        return is_null($callback)
+        ? $response
+        : \call_user_func_array(array($callback), array($response));
     }
 }
