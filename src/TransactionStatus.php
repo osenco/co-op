@@ -1,11 +1,13 @@
 <?php
 namespace Osen\Coop;
 
+use Osen\Coop\Service;
+
 class TransactionStatus extends Service
 {
     public static function send($MessageReference, $callback = null)
     {
-        $url   = 'https://developer.co-opbank.co.ke:' . parent::$port . '/QueryStatus/v1.0.0/query';
+        $url   = parent::$host . '/QueryStatus/v1.0.0/query';
         $token = parent::token();
 
         $requestPayload = array(
@@ -23,8 +25,7 @@ class TransactionStatus extends Service
         curl_setopt($process, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($process, CURLOPT_RETURNTRANSFER, true);
 
-        $return = curl_exec($process);
-
+        $return   = curl_exec($process);
         $response = json_decode($return, true);
 
         return is_null($callback)
