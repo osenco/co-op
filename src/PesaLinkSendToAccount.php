@@ -5,7 +5,7 @@ use Osen\Coop\Service;
 
 class PesaLinkSendToAccount extends Service
 {
-    public static function send($MessageReference, $AccountNumber, $Amount, $TransactionCurrency = 'KES', $Narration = 'Payment', $Destinations, $callback = null)
+    public static function send($MessageReference, $AccountNumber, $Amount, $TransactionCurrency = 'KES', $Narration = 'Payment', $Destinations = array(), $callback = null)
     {
         $url   = parent::$host . '/FundsTransfer/Internal/2.0.0/SendToAccountt';
         $token = parent::token();
