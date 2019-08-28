@@ -1,12 +1,27 @@
 <?php
 namespace Osen\Coop;
 
+use Osen\Coop\Service;
+
 class IFTAccountToAccount extends Service
 {
-    public static function send($MessageReference, $AccountNumber, $Amount, $TransactionCurrency = 'KES', $Narration = 'Payment', $callback = null)
+    public static function send($MessageReference, $AccountNumber, $Amount, $TransactionCurrency = 'KES', $Narration = 'Payment', $Destinations = array(), $callback = null)
     {
-        $url   = (parent::$env == 'live') ? 'https://developer.co-opbank.co.ke:8243/FundsTransfer/Internal/2.0.0/SendToAccountt' : 'https://developer.co-opbank.co.ke:8280/FundsTransfer/Internal/2.0.0/SendToAccountt';
+        $url   = parent::$host . '/FundsTransfer/Internal/2.0.0/SendToAccountt';
         $token = parent::token();
+
+        $ADestinations = array();
+        foreach ($Destinations as $Destination) {
+            if (!isset($Destination["ReferenceNumbenceNumber"])) { $Destination["ReferenceNumbenceNumber"] = $MessageReference;}
+            if (!isset($Destination["AccountNumber"])) { $Destination["AccountNumber"] = self::$config->AccountNumber;}
+            if (!isset($Destination["BankCode"])) { $Destination["BankCode"] = self::$config->BankCode;}
+            if (!isset($Destination["BranchCode"])) { $Destination["BranchCode"] = self::$config->BranchCode;}
+            if (!isset($Destination["Amount"])) { $Destination["Amount"] = $Amount;}
+            if (!isset($Destination["TransactionCurrency"])) { $Destination["TransactionCurrency"] = self::$config->TransactionCurrency;}
+            if (!isset($Destination["Narration"])) { $Destination["Narration"] = $Narration;}
+
+            $ADestinations[] = $Destination;
+        }
 
         $requestPayload = array(
             "MessageReference" => $MessageReference,
@@ -17,17 +32,7 @@ class IFTAccountToAccount extends Service
                 "TransactionCurrency" => self::$config->TransactionCurrency,
                 "Narration"           => $Narration,
             ),
-            "Destinations"     => array(
-                array(
-                    "ReferenceNumbenceNumber" => "40ca18c6765086089a1_1",
-                    "AccountNumber"           => "54321987654321",
-                    "BankCode"                => "011",
-                    "BranchCode"              => "00011001",
-                    "Amount"                  => 0,
-                    "TransactionCurrency"     => $TransactionCurrency,
-                    "Narration"               => $Narration,
-                ),
-            ),
+            "Destinations"     => $ADestinations,
         );
 
         $headers = array('Content-Type: application/json', "Authorization: Bearer {$token}");
@@ -42,15 +47,11 @@ class IFTAccountToAccount extends Service
         curl_setopt($process, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($process, CURLOPT_RETURNTRANSFER, true);
 
-        $return = curl_exec($process);
-
-        $return = curl_exec($process);
-
+        $return   = curl_exec($process);
         $response = json_decode($return, true);
 
         return is_null($callback)
         ? $response
         : \call_user_func_array(array($callback), array($response));
-
     }
 }
