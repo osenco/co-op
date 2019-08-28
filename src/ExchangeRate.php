@@ -1,5 +1,6 @@
 <?php
 namespace Osen\Coop;
+
 use Osen\Coop\Service;
 
 class ExchangeRate extends Service
