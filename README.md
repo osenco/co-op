@@ -19,7 +19,7 @@ We recommend using the following helper functions
 ### Check Account Balance
 ```php
     $response = CoopAccountBalance($MessageReference, $AccountNumber = null, $callback = null);
-}
+
 ```
 
 ### Check AccountTransactions
