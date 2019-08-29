@@ -2,8 +2,16 @@
 Intuitive PHP SDK Co-operative Bank Kenya API
 
 ## Installation
+Install via composer by typing in your terminal
+
 ```cmd
 composer require osenco/co-op
+```
+
+If you dont use composer you can just download this library from the releases, unzip it in your project and include the autoload.php file in your project.
+
+```php
+require_once('path/to/autoload.php');
 ```
 
 ## Setup
