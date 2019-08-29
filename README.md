@@ -1,3 +1,11 @@
+# Co-operative Bank Kenya PHP SDK
+Intuitive PHP SDK Co-operative Bank Kenya API
+
+## Installation
+```cmd
+composer require osenco/co-op
+```
+
 ## Setup
 Use the `setup_coop` helper function to configure and instantiate our object
 
