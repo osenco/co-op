@@ -101,10 +101,10 @@ The last OPTIONAL argument in the functions above (`$callback`) allows you to ad
 
 ### Using A Defined Function
 ```php
-    function process_coop_transaction_status($response) {
+    function processCoopTransactionStatus($response) {
         // Do something with $response
     }
-    $response = coopTransactionStatus($MessageReference, 'process_coop_transaction_status');
+    $response = coopTransactionStatus($MessageReference, 'processCoopTransactionStatus');
 ```
 
 ### Using A Closure
