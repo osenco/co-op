@@ -15,7 +15,7 @@ require_once('path/to/autoload.php');
 ```
 
 ## Setup
-Use the `setup_coop` helper function to configure and instantiate our object
+Use the `coopSetup` helper function to configure and instantiate our object
 
 ```php
     $config = array(
@@ -28,7 +28,7 @@ Use the `setup_coop` helper function to configure and instantiate our object
         "CallbackURL"         => "/coop/callback",
         "TransactionCurrency" => "KES",
     );
-    setup_coop($config);
+    coopSetup($config);
 ```
 ### Usage
 We recommend using the following helper functions
