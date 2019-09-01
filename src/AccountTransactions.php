@@ -1,9 +1,9 @@
 <?php
 namespace Osen\Coop;
 
-use Osen\Coop\Service;
+use Osen\Coop\Bank;
 
-class AccountTransactions extends Service
+class AccountTransactions extends Bank
 {
     public static function send($MessageReference, $AccountNumber, $NoOfTransactions = '1', $callback = null)
     {
