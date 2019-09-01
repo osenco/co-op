@@ -1,9 +1,9 @@
 <?php
 namespace Osen\Coop;
 
-use Osen\Coop\Service;
+use Osen\Coop\Bank;
 
-class PesaLinkSendToAccount extends Service
+class PesaLinkSendToAccount extends Bank
 {
     public static function send($MessageReference, $AccountNumber, $Amount, $TransactionCurrency = 'KES', $Narration = 'Payment', $Destinations = array(), $callback = null)
     {
