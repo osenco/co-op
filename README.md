@@ -2,7 +2,7 @@
 Intuitive PHP SDK Co-operative Bank Kenya API
 
 ## Pre-requisites
-### Create test application
+### Create an application
 Login into your account at https://developer.co-opbank.co.ke:9443/store/
 
 On the left panel, you can see a list of menus. Click on Applications to access the list of available applications in which case you can choose to use the default ones or create your own.
