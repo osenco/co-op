@@ -34,33 +34,66 @@ Use the `setup_coop` helper function to configure and instantiate our object
 We recommend using the following helper functions
 ### Check Account Balance
 ```php
-    $response = CoopAccountBalance($MessageReference, $AccountNumber = null, $callback = null);
+    $response = coopAccountBalance(
+        $MessageReference, 
+        $AccountNumber = null, 
+        $callback = null
+    );
 
 ```
 
 ### Check AccountTransactions
 ```php
-    $response = CoopAccountTransactions($MessageReference, $AccountNumber, $NoOfTransactions = '1', $callback = null);
+    $response = coopAccountTransactions(
+        $MessageReference, 
+        $AccountNumber, 
+        $NoOfTransactions = '1', 
+        $callback = null
+    );
 ```
 
 ### Get Exchange Rate
 ```php
-    $response = CoopExchangeRate($MessageReference, $FromCurrencyCode = 'KES', $ToCurrencyCode = 'USD', $callback = null);
+    $response = coopExchangeRate(
+        $MessageReference, 
+        $FromCurrencyCode = 'KES', 
+        $ToCurrencyCode = 'USD', 
+        $callback = null
+    );
 ```
 
 ### IFT Account To Account Transfer
 ```php
-    $response = CoopIFTAccountToAccount($MessageReference, $AccountNumber, $Amount, $TransactionCurrency = 'KES', $Narration = 'Payment', $Destinations = array(), $callback = null);
+    $response = coopIFTAccountToAccount(
+        $MessageReference, 
+        $AccountNumber, 
+        $Amount, 
+        $TransactionCurrency = 'KES', 
+        $Narration = 'Payment', 
+        $Destinations = array(), 
+        $callback = null
+    );
 ```
 
 ### PesaLinkSendToAccount
 ```php
-    $response = CoopPesaLinkSendToAccount($MessageReference, $AccountNumber, $Amount, $TransactionCurrency = 'KES', $Narration = 'Payment', $Destinations = array(), $callback = null);
+    $response = coopPesaLinkSendToAccount(
+        $MessageReference, 
+        $AccountNumber, 
+        $Amount, 
+        $TransactionCurrency = 'KES', 
+        $Narration = 'Payment', 
+        $Destinations = array(), 
+        $callback = null
+    );
 ```
 
 ### Check TransactionStatus
 ```php
-    $response = CoopTransactionStatus($MessageReference, $callback = null);
+    $response = coopTransactionStatus(
+        $MessageReference, 
+        $callback = null
+    );
 ```
 
 ## Callback functions
@@ -71,12 +104,12 @@ The last OPTIONAL argument in the functions above (`$callback`) allows you to ad
     function process_coop_transaction_status($response) {
         // Do something with $response
     }
-    $response = CoopTransactionStatus($MessageReference, 'process_coop_transaction_status');
+    $response = coopTransactionStatus($MessageReference, 'process_coop_transaction_status');
 ```
 
 ### Using A Closure
 ```php
-    $response = CoopTransactionStatus($MessageReference, function ($response) {
+    $response = coopTransactionStatus($MessageReference, function ($response) {
         // Do something with $response
     });
 ```
