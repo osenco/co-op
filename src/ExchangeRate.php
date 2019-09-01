@@ -1,9 +1,9 @@
 <?php
 namespace Osen\Coop;
 
-use Osen\Coop\Service;
+use Osen\Coop\Bank;
 
-class ExchangeRate extends Service
+class ExchangeRate extends Bank
 {
     public static function send($MessageReference, $FromCurrencyCode = 'KES', $ToCurrencyCode = 'USD', $callback = null)
     {
