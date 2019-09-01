@@ -33,6 +33,8 @@ Use the `coopSetup` helper function to configure and instantiate our object
 ### Usage
 We recommend using the following helper functions
 ### Check Account Balance
+Account Balance Enquiry API will enable you to enquire about your own Co-operative Bank accounts' balance as at now for the specified account number 
+
 ```php
     $response = coopAccountBalance(
         $MessageReference, 
@@ -43,6 +45,8 @@ We recommend using the following helper functions
 ```
 
 ### Check AccountTransactions
+Account Transactions Enquiry API will enable you to enquire about your own Co-operative Bank accounts' latest transactions for the specified account number and number of transactions to be returned 
+
 ```php
     $response = coopAccountTransactions(
         $MessageReference, 
@@ -53,6 +57,8 @@ We recommend using the following helper functions
 ```
 
 ### Get Exchange Rate
+Exchange Rate Enquiry API will enable you to enquire about the current SPOT exchange rate for the specified currencies
+
 ```php
     $response = coopExchangeRate(
         $MessageReference, 
@@ -63,6 +69,8 @@ We recommend using the following helper functions
 ```
 
 ### IFT Account To Account Transfer
+Internal Funds Transfer Account to Account API will enable you to transfer funds from your own Co-operative Bank account to other Co-operative Bank account(s) 
+
 ```php
     $response = coopIFTAccountToAccount(
         $MessageReference, 
@@ -76,6 +84,8 @@ We recommend using the following helper functions
 ```
 
 ### PesaLinkSendToAccount
+PesaLink Send to Account Funds Transfer API will enable you to transfer funds from your own Co-operative Bank account to Bank account(s) in IPSL participating banks
+
 ```php
     $response = coopPesaLinkSendToAccount(
         $MessageReference, 
@@ -89,6 +99,8 @@ We recommend using the following helper functions
 ```
 
 ### Check TransactionStatus
+This is a Transaction Status Enquiry Request interface called by an API consumer to APIM to enquire the status of an earlier requested transaction.
+
 ```php
     $response = coopTransactionStatus(
         $MessageReference, 
