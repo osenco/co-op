@@ -19,7 +19,7 @@ class TransactionStatus extends Bank
         $process = curl_init();
         curl_setopt($process, CURLOPT_URL, $url);
         curl_setopt($process, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($process, CURLOPT_POSTFIELDS, $requestPayload);
+        curl_setopt($process, CURLOPT_POSTFIELDS, json_encode($requestPayload));
         curl_setopt($process, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($process, CURLOPT_TIMEOUT, 30);
         curl_setopt($process, CURLOPT_SSL_VERIFYPEER, false);
