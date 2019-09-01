@@ -10,6 +10,7 @@ spl_autoload_register(function ($class) {
         require_once __DIR__ . "/src/{$path}.php";
     }
 });
+
 /**
  * Load helper functions for more concise code
  */
