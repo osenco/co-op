@@ -4,12 +4,14 @@ namespace Osen\Coop;
 class Service
 {
     public static $config;
+    public static $host;
 
     public static function init($configs = array())
     {
         $defaults = array(
-            "CK"                  => "",
-            "SK"                  => "",
+            "Env"                 => "sandbox",
+            "ConsumerKey"         => "",
+            "ConsumerSecret"      => "",
             "AccountNumber"       => "54321987654321",
             "BankCode"            => "011",
             "BranchCode"          => "00011001",
@@ -19,11 +21,16 @@ class Service
 
         $parsed       = array_merge($defaults, $configs);
         self::$config = (object) $parsed;
+        
+        self::$host = ($parsed['Env'] == 'sandbox') 
+            ? 'https://developer.co-opbank.co.ke:8243' 
+            : 'https://developer.co-opbank.co.ke:8280';
     }
 
     public static function token()
     {
-        $authorization = base64_encode(self::$config->CK . ':' . self::$config->SK);
+        $url           = self::$host . '/token';
+        $authorization = base64_encode(self::$config->ConsumerKey . ':' . self::$config->ConsumerSecret);
         $header        = array("Authorization: Basic {$authorization}");
         $content       = "grant_type=client_credentials";
         $curl          = curl_init();
