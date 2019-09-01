@@ -1,6 +1,24 @@
 # Co-operative Bank Kenya PHP SDK
 Intuitive PHP SDK Co-operative Bank Kenya API
 
+## Pre-requisites
+### Create test application
+Login into your account at https://developer.co-opbank.co.ke:9443/store/
+
+On the left panel, you can see a list of menus. Click on Applications to access the list of available applications in which case you can choose to use the default ones or create your own.
+
+### Subscribe to API(s)
+*Once you are logged in, you will be presented to the following page:
+*Select the application from the drop down list. Application is a way of grouping related APIs.
+*You can equally create your own application using steps described earlier.
+*Click “Subscribe”. A pop up message appears as shown:
+
+### Generate Keys
+*Click on “Applications” on the left panel.
+*Choose the application for which you want to generate keys
+*Choose the appropriate environment from the tabs(production or sandbox ). In this manual, we have chosen Sandbox.
+*Specify Callback URL and then click “Generate keys”. Leave other fields have default values;
+
 ## Installation
 Install via composer by typing in your terminal
 
@@ -125,3 +143,18 @@ The last OPTIONAL argument in the functions above (`$callback`) allows you to ad
         // Do something with $response
     });
 ```
+## Test Cases
+
+As a developer, the test cases will be available to you for download as you are creating the sandbox app.
+
+The test cases are in place to ensure that you have well understood the API structure for requests and responses for our different APIs. These test cases are in an excel spreadsheet that you should fill in with the results from each of the test scenarios that you want to consume.
+
+As the Test cases will cover all the APIs available, you will only be required to carry out the test cases for the APIs you had initially selected.
+
+## Go - Live
+
+Once you have already tried out the APIs on our platform and have tested these against our test cases provided, you can make a formal request to go to production.
+
+You will need to have the test cases duly filled, then send an email request, together with these filled in test cases, to our support team who will guide you on the next steps to enable you to get to production.
+
+Send the email request and the test cases to digitalbanking@co-opbank.co.ke
