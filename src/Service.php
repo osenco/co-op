@@ -10,8 +10,8 @@ class Service
     {
         $defaults = array(
             "Env"                 => "sandbox",
-            "ConsumerKey"         => "",
-            "ConsumerSecret"      => "",
+            "ConsumerKey"         => "ss0sD2ANhjvhx_rHU0a6Xf8ROdYa",
+            "ConsumerSecret"      => "zOfReXCIwn1TfnEYJJJGNP6l3Tka",
             "AccountNumber"       => "54321987654321",
             "BankCode"            => "011",
             "BranchCode"          => "00011001",
