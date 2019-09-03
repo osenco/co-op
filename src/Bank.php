@@ -1,7 +1,7 @@
 <?php
 namespace Osen\Coop;
 
-class Service
+class Bank
 {
     public static $config;
     public static $host;
