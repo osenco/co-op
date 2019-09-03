@@ -5,14 +5,14 @@ use Osen\Coop\Bank;
 
 class AccountTransactions extends Bank
 {
-    public static function send($MessageReference, $AccountNumber, $NoOfTransactions = '1', $callback = null)
+    public static function send($messageReference, $accountNumber, $NoOfTransactions = '1', $callback = null)
     {
         $url   = parent::$host . '/Enquiry/AccountTransactions/1.0.0/Account';
         $token = parent::token();
 
         $requestPayload = array(
-            "MessageReference" => $MessageReference,
-            "AccountNumber"    => $AccountNumber,
+            "MessageReference" => $messageReference,
+            "AccountNumber"    => $accountNumber,
             "NoOfTransactions" => $NoOfTransactions,
         );
 

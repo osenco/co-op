@@ -5,34 +5,34 @@ use Osen\Coop\Bank;
 
 class IFTAccountToAccount extends Bank
 {
-    public static function send($MessageReference, $AccountNumber, $Amount, $TransactionCurrency = 'KES', $Narration = 'Payment', $Destinations = array(), $callback = null)
+    public static function send($messageReference, $accountNumber, $amount, $transactionCurrency = 'KES', $narration = 'Payment', $destinations = array(), $callback = null)
     {
         $url   = parent::$host . '/FundsTransfer/Internal/2.0.0/SendToAccountt';
         $token = parent::token();
 
-        $ADestinations = array();
-        foreach ($Destinations as $Destination) {
-            if (!isset($Destination["ReferenceNumbenceNumber"])) { $Destination["ReferenceNumbenceNumber"] = $MessageReference;}
-            if (!isset($Destination["AccountNumber"])) { $Destination["AccountNumber"] = self::$config->AccountNumber;}
-            if (!isset($Destination["BankCode"])) { $Destination["BankCode"] = self::$config->BankCode;}
-            if (!isset($Destination["BranchCode"])) { $Destination["BranchCode"] = self::$config->BranchCode;}
-            if (!isset($Destination["Amount"])) { $Destination["Amount"] = $Amount;}
-            if (!isset($Destination["TransactionCurrency"])) { $Destination["TransactionCurrency"] = self::$config->TransactionCurrency;}
-            if (!isset($Destination["Narration"])) { $Destination["Narration"] = $Narration;}
+        $aDestinations = array();
+        foreach ($destinations as $destination) {
+            if (!isset($destination["ReferenceNumbenceNumber"])) { $destination["ReferenceNumbenceNumber"] = $messageReference;}
+            if (!isset($destination["AccountNumber"])) { $destination["AccountNumber"] = self::$config->accountNumber;}
+            if (!isset($destination["BankCode"])) { $destination["BankCode"] = self::$config->BankCode;}
+            if (!isset($destination["BranchCode"])) { $destination["BranchCode"] = self::$config->BranchCode;}
+            if (!isset($destination["Amount"])) { $destination["Amount"] = $amount;}
+            if (!isset($destination["transactionCurrency"])) { $destination["transactionCurrency"] = self::$config->transactionCurrency;}
+            if (!isset($destination["Narration"])) { $destination["Narration"] = $narration;}
 
-            $ADestinations[] = $Destination;
+            $aDestinations[] = $destination;
         }
 
         $requestPayload = array(
-            "MessageReference" => $MessageReference,
+            "MessageReference" => $messageReference,
             "CallBackUrl"      => parent::$config->callback_url,
             "Source"           => array(
-                "AccountNumber"       => self::$config->AccountNumber,
-                "Amount"              => $Amount,
-                "TransactionCurrency" => self::$config->TransactionCurrency,
-                "Narration"           => $Narration,
+                "AccountNumber"       => self::$config->accountNumber,
+                "Amount"              => $amount,
+                "transactionCurrency" => self::$config->transactionCurrency,
+                "Narration"           => $narration,
             ),
-            "Destinations"     => $ADestinations,
+            "Destinations"     => $aDestinations,
         );
 
         $headers = array('Content-Type: application/json', "Authorization: Bearer {$token}");

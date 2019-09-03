@@ -37,14 +37,14 @@ Use the `coopSetup` helper function to configure and instantiate our object
 
 ```php
     $config = array(
-        "Env"                 => "sandbox",
-        "ConsumerKey"         => "ss0sD2ANhjvhx_rHU0a6Xf8ROdYa",
-        "ConsumerSecret"      => "zOfReXCIwn1TfnEYJJJGNP6l3Tka",
-        "AccountNumber"       => "54321987654321",
-        "BankCode"            => "011",
-        "BranchCode"          => "00011001",
-        "CallbackURL"         => "/coop/callback",
-        "TransactionCurrency" => "KES",
+        "env"                 => "sandbox",
+        "consumerKey"         => "ss0sD2ANhjvhx_rHU0a6Xf8ROdYa",
+        "consumerSecret"      => "zOfReXCIwn1TfnEYJJJGNP6l3Tka",
+        "accountNumber"       => "54321987654321",
+        "bankCode"            => "011",
+        "branchCode"          => "00011001",
+        "callbackURL"         => "/coop/callback",
+        "transactionCurrency" => "KES",
     );
     coopSetup($config);
 ```
@@ -55,8 +55,8 @@ Account Balance Enquiry API will enable you to enquire about your own Co-operati
 
 ```php
     $response = coopAccountBalance(
-        $MessageReference, 
-        $AccountNumber = null, 
+        $messageReference, 
+        $accountNumber = null, 
         $callback = null
     );
 
@@ -67,8 +67,8 @@ Account Transactions Enquiry API will enable you to enquire about your own Co-op
 
 ```php
     $response = coopAccountTransactions(
-        $MessageReference, 
-        $AccountNumber, 
+        $messageReference, 
+        $accountNumber, 
         $NoOfTransactions = '1', 
         $callback = null
     );
@@ -79,9 +79,9 @@ Exchange Rate Enquiry API will enable you to enquire about the current SPOT exch
 
 ```php
     $response = coopExchangeRate(
-        $MessageReference, 
-        $FromCurrencyCode = 'KES', 
-        $ToCurrencyCode = 'USD', 
+        $messageReference, 
+        $fromCurrencyCode = 'KES', 
+        $toCurrencyCode = 'USD', 
         $callback = null
     );
 ```
@@ -91,39 +91,57 @@ Internal Funds Transfer Account to Account API will enable you to transfer funds
 
 ```php
     $response = coopIFTAccountToAccount(
-        $MessageReference, 
-        $AccountNumber, 
-        $Amount, 
-        $TransactionCurrency = 'KES', 
-        $Narration = 'Payment', 
-        $Destinations = array(), 
+        $messageReference, 
+        $accountNumber, 
+        $amount, 
+        $transactionCurrency = 'KES', 
+        $narration = 'Payment', 
+        $destinations = array(), 
         $callback = null
     );
 ```
 
-### PesaLinkSendToAccount
+### PesaLink Send To Account
 PesaLink Send to Account Funds Transfer API will enable you to transfer funds from your own Co-operative Bank account to Bank account(s) in IPSL participating banks
 
 ```php
     $response = coopPesaLinkSendToAccount(
-        $MessageReference, 
-        $AccountNumber, 
-        $Amount, 
-        $TransactionCurrency = 'KES', 
-        $Narration = 'Payment', 
-        $Destinations = array(), 
+        $messageReference, 
+        $accountNumber, 
+        $amount, 
+        $transactionCurrency = 'KES', 
+        $narration = 'Payment', 
+        $destinations = array(), 
         $callback = null
     );
 ```
 
-### Check TransactionStatus
+### Check Transaction Status
 This is a Transaction Status Enquiry Request interface called by an API consumer to APIM to enquire the status of an earlier requested transaction.
 
 ```php
     $response = coopTransactionStatus(
-        $MessageReference, 
+        $messageReference, 
         $callback = null
     );
+```
+
+## Callback URL and Reconciling Data
+Use the `coopReconcile()` helper function at your callback URL endpoint to process responses from the API, optionally passing a callable function to process the API responses. You can either pass a defined function or a closure
+
+### Using A Defined Function
+```php
+    function processCoopTransactionStatusResponse($response) {
+        // Do something with $response
+    }
+    $response = coopReconcile('processCoopTransactionStatusResponse');
+```
+
+### Using A Closure
+```php
+    $response = coopReconcile(function ($response) {
+        // Do something with $response
+    });
 ```
 
 ## Callback functions
@@ -134,12 +152,12 @@ The last OPTIONAL argument in the functions above (`$callback`) allows you to ad
     function processCoopTransactionStatus($response) {
         // Do something with $response
     }
-    $response = coopTransactionStatus($MessageReference, 'processCoopTransactionStatus');
+    $response = coopTransactionStatus($messageReference, 'processCoopTransactionStatus');
 ```
 
 ### Using A Closure
 ```php
-    $response = coopTransactionStatus($MessageReference, function ($response) {
+    $response = coopTransactionStatus($messageReference, function ($response) {
         // Do something with $response
     });
 ```

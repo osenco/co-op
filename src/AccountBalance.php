@@ -5,15 +5,15 @@ use Osen\Coop\Bank;
 
 class AccountBalance extends Bank
 {
-    public static function send($MessageReference, $AccountNumber = null, $callback = null)
+    public static function send($messageReference, $accountNumber = null, $callback = null)
     {
         $url           = parent::$host . '/Enquiry/AccountBalance/1.0.0/Account';
         $token         = parent::token();
-        $AccountNumber = is_null($AccountNumber) ? parent::$config->AccountNumber : $AccountNumber;
+        $accountNumber = is_null($accountNumber) ? parent::$config->accountNumber : $accountNumber;
 
         $requestPayload = array(
-            "MessageReference" => $MessageReference,
-            "AccountNumber"    => $AccountNumber,
+            "MessageReference" => $messageReference,
+            "AccountNumber"    => $accountNumber,
         );
 
         $headers = array('Content-Type: application/json', "Authorization: Bearer {$token}");

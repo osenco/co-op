@@ -5,15 +5,15 @@ use Osen\Coop\Bank;
 
 class ExchangeRate extends Bank
 {
-    public static function send($MessageReference, $FromCurrencyCode = 'KES', $ToCurrencyCode = 'USD', $callback = null)
+    public static function send($messageReference, $fromCurrencyCode = 'KES', $toCurrencyCode = 'USD', $callback = null)
     {
         $url   = parent::$host . '/Enquiry/ExchangeRate/1.0.0';
         $token = parent::token();
 
         $requestPayload = array(
-            "MessageReference" => $MessageReference,
-            "FromCurrencyCode" => $FromCurrencyCode,
-            "ToCurrencyCode"   => $ToCurrencyCode,
+            "MessageReference" => $messageReference,
+            "FromCurrencyCode" => $fromCurrencyCode,
+            "ToCurrencyCode"   => $toCurrencyCode,
         );
 
         $headers = array('Content-Type: application/json', "Authorization: Bearer {$token}");

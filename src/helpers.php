@@ -13,43 +13,50 @@ if (!function_exists('coopSetup')) {
 }
 
 if (!function_exists('coopAccountBalance')) {
-    function coopAccountBalance($MessageReference, $AccountNumber = null, $callback = null)
+    function coopAccountBalance($messageReference, $accountNumber = null, $callback = null)
     {
-        return Osen\Coop\AccountBalance::send($MessageReference, $AccountNumber, $callback);
+        return Osen\Coop\AccountBalance::send($messageReference, $accountNumber, $callback);
     }
 }
 
 if (!function_exists('coopAccountTransactions')) {
-    function coopAccountTransactions($MessageReference, $AccountNumber, $NoOfTransactions = '1', $callback = null)
+    function coopAccountTransactions($messageReference, $accountNumber, $NoOfTransactions = '1', $callback = null)
     {
-        return Osen\Coop\AccountTransactions::send($MessageReference, $AccountNumber, $NoOfTransactions, $callback);
+        return Osen\Coop\AccountTransactions::send($messageReference, $accountNumber, $NoOfTransactions, $callback);
     }
 }
 
 if (!function_exists('coopExchangeRate')) {
-    function coopExchangeRate($MessageReference, $FromCurrencyCode = 'KES', $ToCurrencyCode = 'USD', $callback = null)
+    function coopExchangeRate($messageReference, $fromCurrencyCode = 'KES', $toCurrencyCode = 'USD', $callback = null)
     {
-        return Osen\Coop\ExchangeRate::send($MessageReference, $FromCurrencyCode, $ToCurrencyCode, $callback);
+        return Osen\Coop\ExchangeRate::send($messageReference, $fromCurrencyCode, $toCurrencyCode, $callback);
     }
 }
 
 if (!function_exists('coopIFTAccountToAccount')) {
-    function coopIFTAccountToAccount($MessageReference, $AccountNumber, $Amount, $TransactionCurrency = 'KES', $Narration = 'Payment', $Destinations = array(), $callback = null)
+    function coopIFTAccountToAccount($messageReference, $accountNumber, $amount, $transactionCurrency = 'KES', $narration = 'Payment', $destinations = array(), $callback = null)
     {
-        return Osen\Coop\IFTAccountToAccount::send($MessageReference, $AccountNumber, $Amount, $TransactionCurrency, $Narration, $Destinations, $callback);
+        return Osen\Coop\IFTAccountToAccount::send($messageReference, $accountNumber, $amount, $transactionCurrency, $narration, $destinations, $callback);
     }
 }
 
 if (!function_exists('coopPesaLinkSendToAccount')) {
-    function coopPesaLinkSendToAccount($MessageReference, $AccountNumber, $Amount, $TransactionCurrency = 'KES', $Narration = 'Payment', $Destinations = array(), $callback = null)
+    function coopPesaLinkSendToAccount($messageReference, $accountNumber, $amount, $transactionCurrency = 'KES', $narration = 'Payment', $destinations = array(), $callback = null)
     {
-        return Osen\Coop\PesaLinkSendToAccount::send($MessageReference, $AccountNumber, $Amount, $TransactionCurrency, $Narration, $Destinations, $callback);
+        return Osen\Coop\PesaLinkSendToAccount::send($messageReference, $accountNumber, $amount, $transactionCurrency, $narration, $destinations, $callback);
     }
 }
 
 if (!function_exists('coopTransactionStatus')) {
-    function coopTransactionStatus($MessageReference, $callback = null)
+    function coopTransactionStatus($messageReference, $callback = null)
     {
-        return Osen\Coop\TransactionStatus::send($MessageReference, $callback);
+        return Osen\Coop\TransactionStatus::send($messageReference, $callback);
+    }
+}
+
+if (!function_exists('coopReconcile')) {
+    function coopReconcile($callback = null)
+    {
+        return Osen\Coop\Bank::reconcile($callback);
     }
 }

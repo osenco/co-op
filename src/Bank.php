@@ -9,28 +9,28 @@ class Bank
     public static function init($configs = array())
     {
         $defaults = array(
-            "Env"                 => "sandbox",
-            "ConsumerKey"         => "ss0sD2ANhjvhx_rHU0a6Xf8ROdYa",
-            "ConsumerSecret"      => "zOfReXCIwn1TfnEYJJJGNP6l3Tka",
-            "AccountNumber"       => "54321987654321",
-            "BankCode"            => "011",
-            "BranchCode"          => "00011001",
-            "CallbackURL"         => "/coop/callback",
-            "TransactionCurrency" => "KES",
+            "env"                 => "sandbox",
+            "consumerKey"         => "ss0sD2ANhjvhx_rHU0a6Xf8ROdYa",
+            "consumerSecret"      => "zOfReXCIwn1TfnEYJJJGNP6l3Tka",
+            "accountNumber"       => "54321987654321",
+            "bankCode"            => "011",
+            "branchCode"          => "00011001",
+            "callbackURL"         => "/coop/callback",
+            "transactionCurrency" => "KES",
         );
 
         $parsed       = array_merge($defaults, $configs);
         self::$config = (object) $parsed;
-        
-        self::$host = ($parsed['Env'] == 'sandbox') 
-            ? 'https://developer.co-opbank.co.ke:8243' 
-            : 'https://developer.co-opbank.co.ke:8280';
+
+        self::$host = ($parsed['env'] == 'sandbox')
+        ? 'https://developer.co-opbank.co.ke:8243'
+        : 'https://developer.co-opbank.co.ke:8280';
     }
 
     public static function token()
     {
         $url           = self::$host . '/token';
-        $authorization = base64_encode(self::$config->ConsumerKey . ':' . self::$config->ConsumerSecret);
+        $authorization = base64_encode(self::$config->consumerKey . ':' . self::$config->consumerSecret);
         $header        = array("Authorization: Basic {$authorization}");
         $content       = "grant_type=client_credentials";
         $curl          = curl_init();
