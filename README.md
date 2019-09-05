@@ -3,7 +3,7 @@ Intuitive PHP SDK Co-operative Bank Kenya API
 
 ## Pre-requisites
 ### Create an application
-create or login to your account at https://developer.co-opbank.co.ke:9443/store/
+Create or login to your account at https://developer.co-opbank.co.ke:9443/store/
 
 On the left panel, you can see a list of menus. Click on Applications to access the list of available applications in which case you can choose to use the default ones or create your own.
 
@@ -124,6 +124,24 @@ This is a Transaction Status Enquiry Request interface called by an API consumer
     );
 ```
 
+## Callback functions
+The last OPTIONAL argument in the functions above (`$callback`) allows you to add a callable function to process the API responses. You can either pass a defined function or a closure
+
+### Using A Defined Function
+```php
+    function processCoopTransactionStatus($response) {
+        // Do something with $response
+    }
+    $response = coopTransactionStatus($messageReference, 'processCoopTransactionStatus');
+```
+
+### Using A Closure
+```php
+    $response = coopTransactionStatus($messageReference, function ($response) {
+        // Do something with $response
+    });
+```
+
 ## Callback URL and Reconciling Data
 Use the `coopReconcile()` helper function at your callback URL endpoint to process responses from the API, optionally passing a callable function to process the API responses. You can either pass a defined function or a closure
 
@@ -142,23 +160,6 @@ Use the `coopReconcile()` helper function at your callback URL endpoint to proce
     });
 ```
 
-## Callback functions
-The last OPTIONAL argument in the functions above (`$callback`) allows you to add a callable function to process the API responses. You can either pass a defined function or a closure
-
-### Using A Defined Function
-```php
-    function processCoopTransactionStatus($response) {
-        // Do something with $response
-    }
-    $response = coopTransactionStatus($messageReference, 'processCoopTransactionStatus');
-```
-
-### Using A Closure
-```php
-    $response = coopTransactionStatus($messageReference, function ($response) {
-        // Do something with $response
-    });
-```
 ## Test Cases
 
 As a developer, the test cases will be available to you for download as you are creating the sandbox app.
