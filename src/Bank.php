@@ -27,7 +27,7 @@ class Bank
         : 'https://developer.co-opbank.co.ke:8280';
     }
 
-    public function curlRequest($url, $headers, $payload, $post = false)
+    public static function curlRequest($url, $payload = array(), $headers = array(), $post = false)
     {
         $curl = curl_init();
 
@@ -47,7 +47,7 @@ class Bank
         : json_decode($response, true);
     }
 
-    public function curlPostRequest($url, $headers, $payload)
+    public static function curlPostRequest($url, $payload = array(), $headers = array())
     {
         $curl = curl_init();
 
@@ -68,12 +68,12 @@ class Bank
 
     public static function token()
     {
-        $url           = self::$host . '/token';
         $authorization = base64_encode(self::$config->consumerKey . ':' . self::$config->consumerSecret);
-        $headers       = array("Authorization: Basic {$authorization}");
+        $url           = self::$host . '/token';
         $payload       = "grant_type=client_credentials";
+        $headers       = array("Authorization: Basic {$authorization}");
 
-        $response = self::curlRequest($url, $headers, $payload, true);
+        $response = self::curlRequest($url, $payload, $headers, true);
 
         return json_decode($response)->access_token;
     }

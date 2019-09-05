@@ -7,8 +7,8 @@ class ExchangeRate extends Bank
 {
     public static function send($messageReference, $fromCurrencyCode = 'KES', $toCurrencyCode = 'USD', $callback = null)
     {
-        $url   = parent::$host . '/Enquiry/ExchangeRate/1.0.0';
         $token = parent::token();
+        $url   = parent::$host . '/Enquiry/ExchangeRate/1.0.0';
 
         $payload = array(
             "MessageReference" => $messageReference,
@@ -16,8 +16,12 @@ class ExchangeRate extends Bank
             "ToCurrencyCode"   => $toCurrencyCode,
         );
 
-        $headers  = array('Content-Type: application/json', "Authorization: Bearer {$token}");
-        $response = parent::curlPostRequest($url, $headers, $payload);
+        $headers  = array(
+            'Content-Type: application/json', 
+            "Authorization: Bearer {$token}"
+        );
+        
+        $response = parent::curlPostRequest($url, $payload, $headers);
 
         return is_null($callback)
         ? $response

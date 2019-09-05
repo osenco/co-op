@@ -7,8 +7,8 @@ class AccountTransactions extends Bank
 {
     public static function send($messageReference, $accountNumber, $NoOfTransactions = '1', $callback = null)
     {
-        $url   = parent::$host . '/Enquiry/AccountTransactions/1.0.0/Account';
         $token = parent::token();
+        $url   = parent::$host . '/Enquiry/AccountTransactions/1.0.0/Account';
 
         $payload = array(
             "MessageReference" => $messageReference,
@@ -16,8 +16,12 @@ class AccountTransactions extends Bank
             "NoOfTransactions" => $NoOfTransactions,
         );
 
-        $headers  = array('Content-Type: application/json', "Authorization: Bearer {$token}");
-        $response = parent::curlPostRequest($url, $headers, $payload);
+        $headers  = array(
+            'Content-Type: application/json', 
+            "Authorization: Bearer {$token}"
+        );
+
+        $response = parent::curlPostRequest($url, $payload, $headers);
 
         return is_null($callback)
         ? $response

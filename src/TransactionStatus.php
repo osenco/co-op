@@ -7,15 +7,19 @@ class TransactionStatus extends Bank
 {
     public static function send($messageReference, $callback = null)
     {
-        $url   = parent::$host . '/QueryStatus/v1.0.0/query';
         $token = parent::token();
+        $url   = parent::$host . '/QueryStatus/v1.0.0/query';
 
         $payload = array(
             "MessageReference" => $messageReference,
         );
 
-        $headers  = array('Content-Type: application/json', "Authorization: Bearer {$token}");
-        $response = parent::curlPostRequest($url, $headers, $payload);
+        $headers  = array(
+            'Content-Type: application/json', 
+            "Authorization: Bearer {$token}"
+        );
+        
+        $response = parent::curlPostRequest($url, $payload, $headers);
 
         return is_null($callback)
         ? $response

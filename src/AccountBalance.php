@@ -7,17 +7,21 @@ class AccountBalance extends Bank
 {
     public static function send($messageReference, $accountNumber = null, $callback = null)
     {
-        $url           = parent::$host . '/Enquiry/AccountBalance/1.0.0/Account';
         $token         = parent::token();
         $accountNumber = is_null($accountNumber) ? parent::$config->accountNumber : $accountNumber;
+        $url           = parent::$host . '/Enquiry/AccountBalance/1.0.0/Account';
 
         $payload = array(
             "MessageReference" => $messageReference,
             "AccountNumber"    => $accountNumber,
         );
 
-        $headers  = array('Content-Type: application/json', "Authorization: Bearer {$token}");
-        $response = parent::curlPostRequest($url, $headers, $payload);
+        $headers = array(
+            'Content-Type: application/json',
+            "Authorization: Bearer {$token}",
+        );
+
+        $response = parent::curlPostRequest($url, $payload, $headers);
 
         return is_null($callback)
         ? $response

@@ -7,8 +7,8 @@ class PesaLinkSendToAccount extends Bank
 {
     public static function send($messageReference, $accountNumber, $amount, $transactionCurrency = 'KES', $narration = 'Payment', $destinations = array(), $callback = null)
     {
-        $url   = parent::$host . '/FundsTransfer/Internal/2.0.0/SendToAccountt';
         $token = parent::token();
+        $url   = parent::$host . '/FundsTransfer/Internal/2.0.0/SendToAccountt';
 
         $aDestinations = array();
         foreach ($destinations as $destination) {
@@ -35,8 +35,12 @@ class PesaLinkSendToAccount extends Bank
             "Destinations"     => $aDestinations,
         );
 
-        $headers  = array('Content-Type: application/json', "Authorization: Bearer {$token}");
-        $response = parent::curlPostRequest($url, $headers, $payload);
+        $headers  = array(
+            'Content-Type: application/json', 
+            "Authorization: Bearer {$token}"
+        );
+        
+        $response = parent::curlPostRequest($url, $payload, $headers);
 
         return is_null($callback)
         ? $response
