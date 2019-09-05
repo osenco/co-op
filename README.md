@@ -3,20 +3,18 @@ Intuitive PHP SDK Co-operative Bank Kenya API
 
 ## Pre-requisites
 ### Create an application
-Login into your account at https://developer.co-opbank.co.ke:9443/store/
+create or login to your account at https://developer.co-opbank.co.ke:9443/store/
 
 On the left panel, you can see a list of menus. Click on Applications to access the list of available applications in which case you can choose to use the default ones or create your own.
 
 ### Subscribe to API(s)
-* Once you are logged in, you will be presented to the following page:
-* Select the application from the drop down list. Application is a way of grouping related APIs.
-* You can equally create your own application using steps described earlier.
+* Select the application or create your own application using steps described earlier.
 * Click “Subscribe”. A pop up message appears as shown:
 
 ### Generate Keys
 * Click on “Applications” on the left panel.
 * Choose the application for which you want to generate keys
-* Choose the appropriate environment from the tabs(production or sandbox ). In this manual, we have chosen Sandbox.
+* Choose the appropriate environment from the tabs(production or sandbox ).
 * Specify Callback URL and then click “Generate keys”. Leave other fields have default values;
 
 ## Installation

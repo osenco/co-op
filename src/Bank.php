@@ -27,27 +27,53 @@ class Bank
         : 'https://developer.co-opbank.co.ke:8280';
     }
 
+    public function curlRequest($url, $headers, $payload, $post = false)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL            => $url,
+            CURLOPT_HTTPHEADER     => $headers,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST           => $post,
+            CURLOPT_POSTFIELDS     => json_encode($payload),
+        ));
+
+        $response = curl_exec($curl);
+
+        return ($response === false)
+        ? curl_error($curl)
+        : json_decode($response, true);
+    }
+
+    public function curlPostRequest($url, $headers, $payload)
+    {
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($curl);
+
+        return ($response === false)
+        ? curl_error($curl)
+        : json_decode($response, true);
+    }
+
     public static function token()
     {
         $url           = self::$host . '/token';
         $authorization = base64_encode(self::$config->consumerKey . ':' . self::$config->consumerSecret);
-        $header        = array("Authorization: Basic {$authorization}");
-        $content       = "grant_type=client_credentials";
-        $curl          = curl_init();
+        $headers       = array("Authorization: Basic {$authorization}");
+        $payload       = "grant_type=client_credentials";
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL            => $url,
-            CURLOPT_HTTPHEADER     => $header,
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST           => true,
-            CURLOPT_POSTFIELDS     => $content,
-        ));
-
-        $response = curl_exec($curl);
-        if ($response === false) {
-            return curl_error($curl);
-        }
+        $response = self::curlRequest($url, $headers, $payload, true);
 
         return json_decode($response)->access_token;
     }
